@@ -8,17 +8,27 @@ public class ExceptionResponse {
 	private String message;
 	private LocalDateTime time;
 	
+	/*
+	 * Default constructor for ExceptionResponse
+	 */
 	public ExceptionResponse() {
 		super();
 		
 	}
 
+	/*
+	 * Parameterized constructor for ExceptionResponse
+	 */
 	public ExceptionResponse(int status, String message, LocalDateTime time) {
 		super();
 		this.status = status;
 		this.message = message;
 		this.time = time;
 	}
+
+	/*
+	 * Getter and setter methods for all the parameters of ExceptionResponse class
+	 */
 
 	public int getStatus() {
 		return status;

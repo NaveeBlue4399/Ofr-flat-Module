@@ -1,5 +1,8 @@
 package com.ofr.service;
 
+/*
+ * Flat Service implementation 
+ */
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +23,10 @@ public class FlatServiceImpl implements IFlatService{
 	@Autowired
 	private IFlatDao flatDao;
 	
-	
+	/*
+	 * Getter and setter method for flatDao
+	 * @param flatDao
+	 */
 	public IFlatDao getFlatDao() {
 		return flatDao;
 	}
@@ -30,6 +36,13 @@ public class FlatServiceImpl implements IFlatService{
 	}
 
 	String flatIdNotFound="Flat Id not found Exception";
+	
+	/*
+	 * This method is used for add the flat
+	 * return type Flat
+	 * @param flat
+	 * exception ValidFlatDetailsException
+	 */
 	@Override
 	public Flat addFlat(Flat flat) throws ValidFlatDetailsException{
 		if(flat.getCost()==null || flat.getAvailability().isEmpty() ) {
@@ -41,6 +54,13 @@ public class FlatServiceImpl implements IFlatService{
 		}
 	}
 
+	/*
+	 * This method is used for update the flat
+	 * return type Flat
+	 * @param flat
+	 * exception FlatNotFoundException
+	 */
+	
 	@Override
 	public Flat updateFlat(Flat flat) throws FlatNotFoundException{
 		Optional<Flat> flat1=flatDao.findById(flat.getFlatId());
@@ -53,6 +73,12 @@ public class FlatServiceImpl implements IFlatService{
 		}
 	}
 
+	/*
+	 * This method is used for delete the flat
+	 * return type Flat
+	 * @param flat
+	 * exception FlatNotFoundException
+	 */
 	@Override
 	public Flat deleteFlat(Flat flat) throws FlatNotFoundException{
 		Optional<Flat> flat1=flatDao.findById(flat.getFlatId());
@@ -67,6 +93,12 @@ public class FlatServiceImpl implements IFlatService{
 		 return flat;
 	}
 
+	/*
+	 * This method is used to view the flat by id
+	 * return type Flat
+	 * @param id
+	 * exception FlatNotFoundException
+	 */
 	@Override
 	public Optional<Flat> viewFlat(Integer id) throws FlatNotFoundException{
 	    Optional<Flat> flat1=getFlatDao().findById(id);
@@ -80,11 +112,20 @@ public class FlatServiceImpl implements IFlatService{
 	    }
 	}
 
+	/*
+	 * This method is used to view all the flat
+	 * return type Flat List
+	 */
 	@Override
 	public List<Flat> viewAllFlat() {
 		return getFlatDao().findAll();
 	}
 
+	/*
+	 * This method is used for view the flat by cost and availability
+	 * return type Flat List
+	 * @param cost,availability
+	 */
 	@Override
 	public List<Flat> viewAllFlatByCost(Float cost, String availability) {
 		return flatDao.viewAllFlatByCost(cost, availability);

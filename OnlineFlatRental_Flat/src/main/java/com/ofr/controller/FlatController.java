@@ -24,6 +24,9 @@ import com.ofr.exception.ValidFlatDetailsException;
 import com.ofr.model.Flat;
 import com.ofr.service.IFlatService;
 
+/*
+ * This class used to get response for add,update,delete and view the flat details
+ */
 @RestController
 @RequestMapping("/flats")
 @Validated
@@ -40,6 +43,11 @@ public class FlatController {
 		this.flatService = flatService;
 	}
 
+	/*
+	 * This method is used for add the flat and it give the response in boolean type
+	 * @param flat
+	 * exception ValidFlatDetailsException
+	 */
 	@PostMapping("/add")
 	public ResponseEntity<Boolean> addFlat(@Valid @RequestBody Flat flat) throws ValidFlatDetailsException{
 		getFlatService().addFlat(flat);
@@ -48,7 +56,11 @@ public class FlatController {
 		System.out.println("response entity="+responseEntity);
 		return responseEntity;
 	}
-	
+	/*
+	 * This method is used for update the flat and it give the response in boolean type
+	 * @param flat
+	 * exception FlatNotFoundException
+	 */
 	@SuppressWarnings({"rawtypes","unchecked"})
 	@PutMapping("/update")
 	public ResponseEntity<Boolean> updateFlat(@Valid @RequestBody Flat flat) throws FlatNotFoundException{
@@ -56,7 +68,11 @@ public class FlatController {
 		ResponseEntity<Boolean> responseEntity = new ResponseEntity(true,HttpStatus.OK);
 		return responseEntity;
 	}
-	
+	/*
+	 * This method is used for delete the flat and it give the response in boolean type
+	 * @param flat
+	 * exception FlatNotFoundException
+	 */
 	@DeleteMapping("/delete")
 	public ResponseEntity<Boolean> deleteFlat(@RequestBody Flat flat) throws FlatNotFoundException{
 		 getFlatService().deleteFlat(flat);
@@ -64,22 +80,31 @@ public class FlatController {
 		ResponseEntity<Boolean> responseEntity = new ResponseEntity(true, HttpStatus.OK);
 		 return responseEntity;
 	}
-	
+	/*
+	 * This method is used for find the flat by its id and it return the flat details for specific id
+	 * @param id
+	 * exception FlatNotFoundException
+	 */
 	@GetMapping("/find/{id}")
 	public ResponseEntity<Optional<Flat>> viewFlat(@PathVariable("id") Integer id) throws FlatNotFoundException{
 		Optional<Flat> entity = getFlatService().viewFlat(id);
-		return new ResponseEntity<Optional<Flat>>(entity,new HttpHeaders(),HttpStatus.OK);
+		return new ResponseEntity<>(entity,new HttpHeaders(),HttpStatus.OK);
 	}
-	
+	/*
+	 * This method is used for get all the flat and it return the flat details 
+	 */
 	@GetMapping("/all")
 	 public ResponseEntity<List<Flat>> viewAllFlat(){
 	    	List<Flat> list = getFlatService().viewAllFlat();
-	    	return new ResponseEntity<List<Flat>>(list,new HttpHeaders(),HttpStatus.OK);
+	    	return new ResponseEntity<>(list,new HttpHeaders(),HttpStatus.OK);
 	    }
-	
+	/*
+	 * This method is used for find the flat by its id and it return the flat details for specific id
+	 * @param cost, availability
+	 */
 	@GetMapping("/find/{cost}/{availability}")
 	 public ResponseEntity<List<Flat>> viewAllFlatByCost(@PathVariable Float cost ,@PathVariable String availability){
 	    	List<Flat> list = getFlatService().viewAllFlatByCost(cost, availability);
-	    	return new ResponseEntity<List<Flat>>(list,new HttpHeaders(),HttpStatus.OK);
+	    	return new ResponseEntity<>(list,new HttpHeaders(),HttpStatus.OK);
 	    }
 }

@@ -7,7 +7,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="FlatAddress1")
+@Table(name="FlatAddress_Module")
 public class FlatAddress {
 
 	@Id
@@ -25,6 +25,11 @@ public class FlatAddress {
 	private String country;
 	@OneToOne(targetEntity=Flat.class)
 	private Flat flat;
+	
+	/*
+	 * Parameterized constructor for FlatAddres
+	 */
+
 	public FlatAddress( Integer houseNo, String street, String city, String state, Integer pin,
 			String country) {
 		super();
@@ -35,11 +40,16 @@ public class FlatAddress {
 		this.pin = pin;
 		this.country = country;
 	}
+	
+	/*
+	 * Default constructor for FlatAddress
+	 */
 	public FlatAddress() {
 		super();
-		
 	}
-	
+	/*
+	 * Getter and setter methods for all the parameters in the entity class
+	 */
 	public Integer getHouseNo() {
 		return houseNo;
 	}

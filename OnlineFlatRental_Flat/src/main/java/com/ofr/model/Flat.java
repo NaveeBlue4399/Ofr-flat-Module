@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="Flat1")
+@Table(name="Flat_Module")
 public class Flat { 
 
 	@Id
@@ -30,6 +30,10 @@ public class Flat {
 	@Column(name="Availability",length=15)
 	@Size(min=2 , max=3,message="Enter valid detail")
 	private String availability;
+	
+	/*
+	 * Parameterized constructor for flat
+	 */
 	public Flat(Integer flatId, Float cost, FlatAddress flatAddress, String availability) {
 		super();
 		this.flatId = flatId;
@@ -37,10 +41,17 @@ public class Flat {
 		this.flatAddress = flatAddress;
 		this.availability = availability;
 	}
+	/*
+	 * Default constructor for flat
+	 */
 	public Flat() {
 		super();
 		
 	}
+	
+	/*
+	 * Getter and setter methods for all the parameters of flat model class
+	 */
 	public Integer getFlatId() {
 		return flatId;
 	}
